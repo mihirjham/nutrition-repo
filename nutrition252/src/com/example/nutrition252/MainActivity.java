@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class MainActivity extends Activity implements OnItemSelectedListener {
+public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener, OnClickListener {
 
 	private Spinner spinner;
 	private TextView username;
@@ -39,9 +39,9 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
 		spinner.setAdapter(adapter);
 		spinner.setOnItemSelectedListener(this);;
 		
-		/*postIt.setOnClickListener((OnClickListener) this);
-		graph.setOnClickListener((OnClickListener) this);
-		mealTable.setOnClickListener((OnClickListener) this);*/
+		postIt.setOnClickListener( this);
+		graph.setOnClickListener(this);
+		mealTable.setOnClickListener(this);
 		
 	}
 	
@@ -51,11 +51,11 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
 			/*intent = new Intent(v.getContext(), .class);
 			startActivityForResult(intent, 0);*/
 		} else if (id == R.id.bGraph) {
-			/*intent = new Intent(v.getContext(), .class);
-			startActivityForResult(intent, 0);*/
+			intent = new Intent(v.getContext(), Graph.class);
+			startActivityForResult(intent, 0);
 		} else if (id == R.id.bMealTable) {
-			/*intent = new Intent(v.getContext(), .class);
-			startActivityForResult(intent, 0);*/
+			intent = new Intent(v.getContext(), MealTable.class);
+			startActivityForResult(intent, 0);
 		} 
 	}
 	@Override
