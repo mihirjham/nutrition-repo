@@ -5,4 +5,53 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string-array name="calories">
+        <item></item>
+        <item>Apple-72</item>
+        <item>Bagel-289</item>
+        <item>Banana-105</item>
+        <item>Beer-153</item>
+        <item>Bread-66</item>
+        <item>Butter-102</item>
+        <item>Carrots-52</item>
+        <item>Cheddar Cheese-113</item>
+        <item>Chicken Breast-142</item>
+        <item>Chilli-287</item>
+        <item>Cookie-59</item>
+        <item>Coffee-20</item>
+        <item>Soda-136</item>
+        <item>Corn-180</item>
+        <item>Egg-102</item>
+        <item>Graham Cracker-59</item>
+        <item>Granola Bar-193</item>
+        <item>Green Beans-40</item>
+        <item>Ground Beef-193</item>
+        <item>Hotdog-137</item>
+        <item>Icecream-145</item>
+        <item>Jelly Doughnut-289</item>
+        <item>Ketchup-15</item>
+        <item>Milk-122</item>
+        <item>mixed Nuts-168</item>
+        <item>Mustard-6</item>
+        <item>Oatmeal-147</item>
+        <item>Orange Juice-112</item>
+        <item>Peanut Butter-180</item>
+        <item>Pizza Slice-298</item>
+        <item>Pork Chop-221</item>
+        <item>Potato-161</item>
+        <item>Potato Chips-155</item>
+        <item>Pretzel-108</item>
+        <item>Raisins-130</item>
+        <item>Ranch-146</item>
+        <item>Red Wine-123</item>
+        <item>Rice-205</item>
+        <item>Salsa-35</item>
+        <item>Shrimp-84</item>
+        <item>Spaghetti-221</item>
+        <item>Spaghetti Sauce-92</item>
+        <item>Tuna-100</item>
+        <item>White Wine-121</item>
+        <item>Yellow Cake-243</item>
+    </string-array>
+
 </resources>
