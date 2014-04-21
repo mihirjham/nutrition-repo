@@ -17,13 +17,13 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnItemSelectedListener {
 
-	Spinner spinner;
-	TextView username;
-	Button postIt;
-	Button graph;
-	Button mealTable;
-	EditText manualCalories;
-	Intent intent;
+	private Spinner spinner;
+	private TextView username;
+	private Button postIt;
+	private Button graph;
+	private Button mealTable;
+	private EditText manualCalories;
+	private Intent intent;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,11 +39,12 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
 		spinner.setAdapter(adapter);
 		spinner.setOnItemSelectedListener(this);;
 		
-		postIt.setOnClickListener((OnClickListener) this);
+		/*postIt.setOnClickListener((OnClickListener) this);
 		graph.setOnClickListener((OnClickListener) this);
-		mealTable.setOnClickListener((OnClickListener) this);
+		mealTable.setOnClickListener((OnClickListener) this);*/
 		
 	}
+	
 	public void onClick(View v) {
 		int id = v.getId();
 		if (id == R.id.bPostIt) {
