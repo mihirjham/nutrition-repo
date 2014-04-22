@@ -1,12 +1,15 @@
 package com.example.nutrition252;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,8 +51,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 	public void onClick(View v) {
 		int id = v.getId();
 		if (id == R.id.bPostIt) {
-			/*intent = new Intent(v.getContext(), .class);
-			startActivityForResult(intent, 0);*/
+			//Send data entered to server
+			Socket toServer;
+			try{
+				toServer = new Socket("sslab01.cs.purdue.edu",5555);
+				PrintWriter printwriter = new PrintWriter(toServer.getOutputStream(),true);
+				sendToServer(printwriter);
+				toServer.close();
+			}
+			catch(IOException ioe){
+				Toast.makeText(this, "Couldn't Connect to Host", Toast.LENGTH_SHORT).show();
+			}
 		} else if (id == R.id.bGraph) {
 			intent = new Intent(v.getContext(), Graph.class);
 			startActivityForResult(intent, 0);
@@ -69,6 +81,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 	public void onNothingSelected(AdapterView<?> parent) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	//sends info to server and closes printwriter
+	public void sendToServer(PrintWriter printwriter){
+		String command = new String("STORE|");
+		command.concat(username.getText() + "|");
+		String selectedItem = spinner.getSelectedItem().toString();
+		selectedItem = selectedItem.replace('-','|');// separate the food item and calorie number
+		command.concat(selectedItem);
+		printwriter.print(command);
+		printwriter.close();
 	}
 
 }
