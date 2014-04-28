@@ -130,5 +130,10 @@ public class MainActivity extends Activity implements
 		printwriter.print(command);
 		printwriter.close();
 	}
+	
+	@Override
+	public void onBackPressed() {
+		return;
+	}
 
 }
