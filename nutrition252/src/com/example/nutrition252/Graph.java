@@ -18,7 +18,7 @@ import android.widget.Toast;
 public class Graph extends Activity implements OnClickListener {
 	Button MealTableGraph;
 	Intent intent;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -26,34 +26,35 @@ public class Graph extends Activity implements OnClickListener {
 		setContentView(R.layout.graph);
 		MealTableGraph = (Button) findViewById(R.id.mealTableButtonGraphWindow);
 		MealTableGraph.setOnClickListener(this);
-		
-		new Thread(){
-			public void run(){
+
+		new Thread() {
+			public void run() {
 				Socket toServer;
 				PrintWriter printwriter;
 				ObjectInputStream tableInfo;
-				try{
-					toServer = new Socket("sslab01.cs.purdue.edu",5555);
-					printwriter = new PrintWriter(toServer.getOutputStream(),true);
-					//asks server to return only dates and calories to plot on graph
-					String command = new String("GET-GRAPH-INFO|root|password");//need to add username
+				try {
+					toServer = new Socket("sslab01.cs.purdue.edu", 5555);
+					printwriter = new PrintWriter(toServer.getOutputStream(),
+							true);
+					// asks server to return only dates and calories to plot on
+					// graph
+					String command = new String("GET-GRAPH-INFO|root|password");// need
+																				// to
+																				// add
+																				// username
 					printwriter.print(command);
 					tableInfo = new ObjectInputStream(toServer.getInputStream());
-					Vector<String> info = (Vector<String>)tableInfo.readObject();
-					//need to add code to display the info obtained from server
+					Vector<String> info = (Vector<String>) tableInfo
+							.readObject();
+					// need to add code to display the info obtained from server
 					printwriter.close();
 					toServer.close();
 					tableInfo.close();
-				}
-				catch(IllegalArgumentException iae){
-				}
-				catch(UnknownHostException uhe){
-				}
-				catch(SecurityException se){
-				}
-				catch(IOException ioe){
-				}
-				catch(ClassNotFoundException cnfe){
+				} catch (IllegalArgumentException iae) {
+				} catch (UnknownHostException uhe) {
+				} catch (SecurityException se) {
+				} catch (IOException ioe) {
+				} catch (ClassNotFoundException cnfe) {
 				}
 			}
 		}.start();
@@ -62,11 +63,11 @@ public class Graph extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		int id=v.getId();
+		int id = v.getId();
 		if (id == R.id.mealTableButtonGraphWindow) {
 			intent = new Intent(v.getContext(), MealTable.class);
 			startActivityForResult(intent, 0);
 		}
-		
+
 	}
 }

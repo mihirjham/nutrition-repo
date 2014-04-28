@@ -58,24 +58,21 @@ public class MainActivity extends Activity implements
 		int id = v.getId();
 		if (id == R.id.bPostIt) {
 			// Send data entered to server
-			new Thread(){
-				public void run(){
-				  Socket toServer;
-				  try {
-					toServer = new Socket("sslab01.cs.purdue.edu", 5555);
-					PrintWriter printwriter = new PrintWriter(toServer.getOutputStream(), true);
-					sendToServer(printwriter);
-					toServer.close();
-				  } 
-				  catch(IllegalArgumentException iae){
-				  }
-				  catch(UnknownHostException uhe){
-				  }
-				  catch(SecurityException se){
-				  }
-				  catch (IOException ioe) {
-				  }
-			    }
+			new Thread() {
+				public void run() {
+					Socket toServer;
+					try {
+						toServer = new Socket("sslab01.cs.purdue.edu", 5555);
+						PrintWriter printwriter = new PrintWriter(
+								toServer.getOutputStream(), true);
+						sendToServer(printwriter);
+						toServer.close();
+					} catch (IllegalArgumentException iae) {
+					} catch (UnknownHostException uhe) {
+					} catch (SecurityException se) {
+					} catch (IOException ioe) {
+					}
+				}
 			}.start();
 		} else if (id == R.id.bGraph) {
 			intent = new Intent(v.getContext(), Graph.class);
@@ -91,7 +88,7 @@ public class MainActivity extends Activity implements
 			long id) {
 		// TODO Auto-generated method stub
 		int indexPosition = spinner.getSelectedItemPosition();
-		//Log.d("Position", "Selected position at: " + indexPosition);
+		// Log.d("Position", "Selected position at: " + indexPosition);
 
 		if (position >= 1) {
 			text = spinner.getSelectedItem().toString();
@@ -109,7 +106,6 @@ public class MainActivity extends Activity implements
 		} else if (position == 0) {
 			manualCalories.setText(" ");
 		}
-		
 
 	}
 
@@ -122,7 +118,8 @@ public class MainActivity extends Activity implements
 	// sends info to server and closes printwriter
 	public void sendToServer(PrintWriter printwriter) {
 		String command = new String("INSERT-MEAL|");
-		command.concat(username.getText() + "|root|password|");//need to change this
+		command.concat(username.getText() + "|root|password|");// need to change
+																// this
 		String selectedItem = spinner.getSelectedItem().toString();
 		selectedItem = selectedItem.replace('-', '|');// separate the food item
 														// and calorie number
@@ -130,7 +127,7 @@ public class MainActivity extends Activity implements
 		printwriter.print(command);
 		printwriter.close();
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		return;

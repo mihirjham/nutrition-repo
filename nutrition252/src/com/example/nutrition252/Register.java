@@ -8,12 +8,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Register extends Activity implements OnClickListener{
+public class Register extends Activity implements OnClickListener {
 	EditText newUsername;
 	EditText newPassword;
 	EditText newConfirmPassowrd;
 	Button confirm;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -21,9 +21,9 @@ public class Register extends Activity implements OnClickListener{
 		setContentView(R.layout.register);
 		newUsername = (EditText) findViewById(R.id.UsernameRegisterPage);
 		newPassword = (EditText) findViewById(R.id.PasswordRegisterPage);
-		newConfirmPassowrd= (EditText) findViewById(R.id.ConfirmEditTextPasswordRegisterPage);
+		newConfirmPassowrd = (EditText) findViewById(R.id.ConfirmEditTextPasswordRegisterPage);
 		confirm = (Button) findViewById(R.id.ConfirmButtonRegisterPage);
-		
+
 		confirm.setOnClickListener(this);
 	}
 
@@ -32,7 +32,8 @@ public class Register extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		int id = v.getId();
 		if (id == R.id.ConfirmButtonRegisterPage) {
-			Intent openGetFit = new Intent("com.example.nutrition252.MAINACTIVITY");
+			Intent openGetFit = new Intent(
+					"com.example.nutrition252.MAINACTIVITY");
 			startActivity(openGetFit);
 		}
 	}
