@@ -47,7 +47,6 @@ public class MainActivity extends Activity implements
 				android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 		spinner.setOnItemSelectedListener(this);
-		
 
 		postIt.setOnClickListener(this);
 		graph.setOnClickListener(this);
@@ -110,6 +109,7 @@ public class MainActivity extends Activity implements
 		} else if (position == 0) {
 			manualCalories.setText(" ");
 		}
+		
 
 	}
 

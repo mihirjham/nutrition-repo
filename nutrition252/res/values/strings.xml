@@ -6,7 +6,7 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="calories">
-        <item></item>
+        <item>Pre-Defined Meal</item>
         <item>Apple-72</item>
         <item>Bagel-289</item>
         <item>Banana-105</item>
