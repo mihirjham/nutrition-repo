@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.lang.Integer;
 
 ///////////////////////////// Mutlithreaded Server /////////////////////////////
 
@@ -113,6 +114,108 @@ class ThreadedHandler implements Runnable
 		}
 	}
 	
+	void getGraphInfo(String args[], PrintWriter out)
+	{
+		Connection conn = null;
+
+		try
+		{
+			conn = getConnection();
+			
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM MealTable WHERE user = ? and date > ? and date < ?");
+			pstmt.setString(1, args[3]);
+			
+			int getMonth = Integer.parseInt(args[4]);
+			java.util.Date date = new java.util.Date();
+			int currentYear = 1900 + date.getYear();
+
+			String lastMonth = currentYear + "-" + (getMonth - 1) + "-" + "31";
+			String nextMonth = currentYear + "-" + (getMonth + 1) + "-" + "01";
+			pstmt.setString(2, lastMonth);
+			pstmt.setString(3, nextMonth);
+
+			ResultSet result = pstmt.executeQuery();
+			int month[] = new int[31];
+
+			while(result.next())
+			{
+				String dateString = result.getString(4);
+				String dateSplit[] = dateString.split("-");
+				month[Integer.parseInt(dateSplit[2]) - 1] += Integer.parseInt(result.getString(3));
+			}
+			result.close();
+			
+			for(int i = 0; i < 31; i++)
+			{
+				out.printf("%d|%4d-%02d-%02d\n", month[i], currentYear, getMonth, i+1);
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+			out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+			}
+		}
+	}
+	
+	void getUserMealsCurrentMonth(String args[], PrintWriter out)
+	{
+		Connection conn = null;
+
+		try
+		{
+			conn = getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM MealTable WHERE user = ? and date > ? and date < ?");
+			pstmt.setString(1, args[3]);
+			
+			java.util.Date date = new java.util.Date();
+			int currentMonth = date.getMonth() + 1;
+			int currentYear = 1900 + date.getYear();
+			
+			String lastMonth =  currentYear + "-" + (currentMonth - 1)+ "-" + "31";
+			String nextMonth = currentYear + "-" + (currentMonth + 1) + "-" + "01";
+			
+			pstmt.setString(2, lastMonth);
+			pstmt.setString(3, nextMonth);
+			
+			ResultSet result = pstmt.executeQuery();
+			while(result.next())
+			{
+				out.print(result.getString(1) + "|");
+				out.print(result.getString(2) + "|");
+				out.print(result.getString(3) + "|");
+				out.print(result.getString(4));
+				out.println();
+			}
+			result.close();
+		}	
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+			out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{
+			}
+		}
+	}
 	
 	void getUserMeals(String args[], PrintWriter out)
 	{
@@ -132,6 +235,76 @@ class ThreadedHandler implements Runnable
 				out.print(result.getString(2) + "|");
 				out.print(result.getString(3) + "|");
 				out.print(result.getString(4));
+				out.println();
+			}
+			
+			result.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+			out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{}
+		}
+	}
+	
+	void createUser(String args[], PrintWriter out)
+	{
+		Connection conn = null;
+		
+		try
+		{
+			conn = getConnection();
+			Statement stat = conn.createStatement();
+			String statement = "INSERT INTO users VALUES('"+args[3]+"','"+args[4]+"')";
+
+			stat.executeUpdate(statement);
+
+			out.println("Created user");
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+			out.println(e.toString());
+		}
+		finally
+		{
+			try
+			{
+				if(conn != null)
+					conn.close();
+			}
+			catch(Exception e)
+			{}
+		}
+	}
+	
+	void findUser(String args[], PrintWriter out)
+	{
+		Connection conn = null;
+
+		try
+		{
+			conn = getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM users where name = ? and password = ?");
+			pstmt.setString(1, args[3]);
+			pstmt.setString(2, args[4]);
+			
+			ResultSet result = pstmt.executeQuery();
+
+			while(result.next())
+			{
+				out.print(result.getString(1) + "|");
+				out.print(result.getString(2));
 				out.println();
 			}
 			
@@ -324,6 +497,22 @@ class ThreadedHandler implements Runnable
 			else if(command.equals("GET-USER-INFO"))
 			{
 				getUserMeals(args, out);
+			}
+			else if(command.equals("GET-USER-INFO-CURRENT"))
+			{
+				getUserMealsCurrentMonth(args, out);
+			}
+			else if(command.equals("GET-GRAPH-INFO"))
+			{
+				getGraphInfo(args, out);
+			}
+			else if(command.equals("CREATE-USER"))
+			{
+				createUser(args, out);
+			}
+			else if(command.equals("FIND-USER"))
+			{
+				findUser(args, out);
 			}
 		}
 		catch (Exception e) {		
