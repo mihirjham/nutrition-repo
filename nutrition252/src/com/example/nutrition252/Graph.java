@@ -1,11 +1,11 @@
 package com.example.nutrition252;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Vector;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class Graph extends Activity implements OnClickListener {
 	Button MealTableGraph;
@@ -26,12 +25,12 @@ public class Graph extends Activity implements OnClickListener {
 		setContentView(R.layout.graph);
 		MealTableGraph = (Button) findViewById(R.id.mealTableButtonGraphWindow);
 		MealTableGraph.setOnClickListener(this);
-
+		
 		new Thread() {
 			public void run() {
 				Socket toServer;
 				PrintWriter printwriter;
-				ObjectInputStream tableInfo;
+				char [] requestedInfo = new char[1024];
 				try {
 					toServer = new Socket("sslab01.cs.purdue.edu", 5555);
 					printwriter = new PrintWriter(toServer.getOutputStream(),
@@ -43,18 +42,16 @@ public class Graph extends Activity implements OnClickListener {
 																				// add
 																				// username
 					printwriter.print(command);
-					tableInfo = new ObjectInputStream(toServer.getInputStream());
-					Vector<String> info = (Vector<String>) tableInfo
-							.readObject();
+					BufferedReader in = new BufferedReader(new InputStreamReader(toServer.getInputStream()));
+					in.read(requestedInfo);
 					// need to add code to display the info obtained from server
 					printwriter.close();
 					toServer.close();
-					tableInfo.close();
+					in.close();
 				} catch (IllegalArgumentException iae) {
 				} catch (UnknownHostException uhe) {
 				} catch (SecurityException se) {
 				} catch (IOException ioe) {
-				} catch (ClassNotFoundException cnfe) {
 				}
 			}
 		}.start();

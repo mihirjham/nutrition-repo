@@ -1,19 +1,18 @@
 package com.example.nutrition252;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 public class MealTable extends Activity {
 
@@ -42,6 +41,7 @@ public class MealTable extends Activity {
 		new Thread() {
 			public void run() {
 				Socket toServer;
+				char [] requestedInfo = new char[1024];
 				try {
 					toServer = new Socket("sslab01.cs.purdue.edu", 5555);
 					PrintWriter printwriter = new PrintWriter(
@@ -52,19 +52,16 @@ public class MealTable extends Activity {
 																				// add
 																				// username
 					printwriter.print(command);
-					ObjectInputStream tableInfo = new ObjectInputStream(
-							toServer.getInputStream());
-					Vector<String> info = (Vector<String>) tableInfo
-							.readObject();
+					BufferedReader in = new BufferedReader(new InputStreamReader(toServer.getInputStream()));
+					in.read(requestedInfo);
 					// need to add code to display the info obtained from server
 					printwriter.close();
 					toServer.close();
-					tableInfo.close();
+					in.close();
 				} catch (IllegalArgumentException iae) {
 				} catch (UnknownHostException uhe) {
 				} catch (SecurityException se) {
 				} catch (IOException ioe) {
-				} catch (ClassNotFoundException cnfe) {
 				}
 			}
 		}.start();
