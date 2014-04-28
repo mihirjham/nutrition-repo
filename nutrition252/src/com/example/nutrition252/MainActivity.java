@@ -7,6 +7,7 @@ import java.net.Socket;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -27,6 +28,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 	private Button mealTable;
 	private EditText manualCalories;
 	private Intent intent;
+	String left,right,text;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,7 +77,20 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 			long id) {
 		// TODO Auto-generated method stub
 		TextView myText = (TextView) view;
-		Toast.makeText(this, "You Selected"+myText.getText(), Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "You Selected "+myText.getText(), Toast.LENGTH_SHORT).show();
+		text = spinner.getSelectedItem().toString();
+		Log.d("Selected",text);
+		int counter = text.indexOf('-');
+		if (counter >= 0) {
+		    left = text.substring(0, counter);
+		    right = text.substring(counter + 1);
+		    Log.d("First",left);
+			Log.d("Second",right);
+		} else {
+		  Log.d("Error", "There is no -");
+		}
+		manualCalories.setText(right, TextView.BufferType.EDITABLE);
+		
 	}
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
