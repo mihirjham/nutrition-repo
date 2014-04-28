@@ -30,22 +30,27 @@ public final class R {
         public static final int main_page_button=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000a;
+        public static final int action_settings=0x7f09000d;
         public static final int bGraph=0x7f090008;
         public static final int bMealTable=0x7f090009;
         public static final int bPostIt=0x7f090007;
         public static final int etCalories=0x7f090003;
         public static final int linearLayout1=0x7f090001;
         public static final int linearLayout2=0x7f090004;
+        public static final int listViewMain=0x7f09000c;
         public static final int spinner=0x7f090006;
         public static final int tvCalories=0x7f090002;
+        public static final int tvListItem=0x7f09000b;
+        public static final int tvListhead=0x7f09000a;
         public static final int tvMeal=0x7f090005;
         public static final int tvUserName=0x7f090000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int graph=0x7f030001;
-        public static final int meal_table=0x7f030002;
+        public static final int list_group=0x7f030002;
+        public static final int list_item=0x7f030003;
+        public static final int meal_table=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f080000;

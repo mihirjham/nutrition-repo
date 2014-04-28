@@ -17,7 +17,7 @@ public class Graph extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.graph);
 		
-		Socket toServer;
+		/*Socket toServer;
 		PrintWriter printwriter;
 		ObjectInputStream tableInfo;
 		try{
@@ -37,6 +37,6 @@ public class Graph extends Activity {
 		}
 		catch(ClassNotFoundException cnfe){
 			Toast.makeText(this, "Error Reading Data From Server", Toast.LENGTH_SHORT).show();
-		}
+		}*/
 	}
 }
