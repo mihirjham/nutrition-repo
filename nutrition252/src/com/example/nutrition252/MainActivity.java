@@ -91,7 +91,7 @@ public class MainActivity extends Activity implements
 			long id) {
 		// TODO Auto-generated method stub
 		int indexPosition = spinner.getSelectedItemPosition();
-		Log.d("Position", "Selected position at: " + indexPosition);
+		//Log.d("Position", "Selected position at: " + indexPosition);
 
 		if (position >= 1) {
 			text = spinner.getSelectedItem().toString();

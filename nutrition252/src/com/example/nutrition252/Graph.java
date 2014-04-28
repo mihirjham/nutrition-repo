@@ -8,15 +8,24 @@ import java.net.UnknownHostException;
 import java.util.Vector;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Toast;
 
-public class Graph extends Activity {
+public class Graph extends Activity implements OnClickListener {
+	Button MealTableGraph;
+	Intent intent;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.graph);
+		MealTableGraph = (Button) findViewById(R.id.mealTableButtonGraphWindow);
+		MealTableGraph.setOnClickListener(this);
 		
 		new Thread(){
 			public void run(){
@@ -48,5 +57,16 @@ public class Graph extends Activity {
 				}
 			}
 		}.start();
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		int id=v.getId();
+		if (id == R.id.mealTableButtonGraphWindow) {
+			intent = new Intent(v.getContext(), MealTable.class);
+			startActivityForResult(intent, 0);
+		}
+		
 	}
 }
