@@ -1,8 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
-    
 
-</LinearLayout>
+      <TextView
+        android:id="@+id/graphView"
+        android:layout_width="match_parent"
+        android:layout_height="184dp"
+        android:text="This is where the graph will be" />
+
+      <TextView
+          android:id="@+id/tvMax"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Maximum" 
+          android:layout_marginTop="200dp"/>
+      <TextView
+          android:id="@+id/tvMin"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Minimum" 
+          android:layout_marginLeft="70dp"
+          android:layout_marginTop="200dp"/>
+      <TextView
+          android:id="@+id/tvAvg"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Average" 
+          android:layout_marginLeft="140dp"
+          android:layout_marginTop="200dp"/>
+      <TextView
+          android:id="@+id/tvAvg"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Healthy or not" 
+          android:layout_marginLeft="140dp"
+          android:layout_marginTop="230dp"/>
+
+    <Button
+        android:id="@+id/mealTableButtonGraphWindow"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:text="Meal Table" 
+        android:layout_marginLeft="375dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/main_page_button"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
+    
+</RelativeLayout>

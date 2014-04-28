@@ -79,13 +79,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 		TextView myText = (TextView) view;
 		Toast.makeText(this, "You Selected "+myText.getText(), Toast.LENGTH_SHORT).show();
 		text = spinner.getSelectedItem().toString();
-		Log.d("Selected",text);
+		//Log.d("Selected",text);
 		int counter = text.indexOf('-');
 		if (counter >= 0) {
 		    left = text.substring(0, counter);
 		    right = text.substring(counter + 1);
-		    Log.d("First",left);
-			Log.d("Second",right);
+		    //Log.d("First",left);
+			//Log.d("Second",right);
 		} else {
 		  Log.d("Error", "There is no -");
 		}

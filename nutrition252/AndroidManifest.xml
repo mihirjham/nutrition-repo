@@ -22,9 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.nutrition252.Graph" >
+        <activity android:name="com.example.nutrition252.Graph" 
+            android:screenOrientation="landscape">
         </activity>
-        <activity android:name="com.example.nutrition252.MealTable" >
+        <activity android:name="com.example.nutrition252.MealTable" 
+            >
         </activity>
     </application>
 
