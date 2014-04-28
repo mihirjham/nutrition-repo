@@ -3,6 +3,7 @@ package com.example.nutrition252;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -58,17 +59,25 @@ public class MainActivity extends Activity implements
 		int id = v.getId();
 		if (id == R.id.bPostIt) {
 			// Send data entered to server
-			Socket toServer;
-			try {
-				toServer = new Socket("sslab01.cs.purdue.edu", 5555);
-				PrintWriter printwriter = new PrintWriter(
-						toServer.getOutputStream(), true);
-				sendToServer(printwriter);
-				toServer.close();
-			} catch (IOException ioe) {
-				Toast.makeText(this, "Couldn't Connect to Host",
-						Toast.LENGTH_SHORT).show();
-			}
+			new Thread(){
+				public void run(){
+				  Socket toServer;
+				  try {
+					toServer = new Socket("sslab01.cs.purdue.edu", 5555);
+					PrintWriter printwriter = new PrintWriter(toServer.getOutputStream(), true);
+					sendToServer(printwriter);
+					toServer.close();
+				  } 
+				  catch(IllegalArgumentException iae){
+				  }
+				  catch(UnknownHostException uhe){
+				  }
+				  catch(SecurityException se){
+				  }
+				  catch (IOException ioe) {
+				  }
+			    }
+			}.start();
 		} else if (id == R.id.bGraph) {
 			intent = new Intent(v.getContext(), Graph.class);
 			startActivityForResult(intent, 0);
@@ -82,9 +91,6 @@ public class MainActivity extends Activity implements
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
-		TextView myText = (TextView) view;
-		Toast.makeText(this, "You Selected " + myText.getText(),
-				Toast.LENGTH_SHORT).show();
 		int indexPosition = spinner.getSelectedItemPosition();
 		Log.d("Position", "Selected position at: " + indexPosition);
 
@@ -115,8 +121,8 @@ public class MainActivity extends Activity implements
 
 	// sends info to server and closes printwriter
 	public void sendToServer(PrintWriter printwriter) {
-		String command = new String("STORE|");
-		command.concat(username.getText() + "|");
+		String command = new String("INSERT-MEAL|");
+		command.concat(username.getText() + "|root|password|");//need to change this
 		String selectedItem = spinner.getSelectedItem().toString();
 		selectedItem = selectedItem.replace('-', '|');// separate the food item
 														// and calorie number
