@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class MealTable extends Activity {
 
-	ExpandableListAdapter listAdapterExapnd;
+	ListAdapter_Expandable listAdapterExapnd;
     ExpandableListView listViewExpand;
     List<String> listHeaderData;
     HashMap<String, List<String>> listChildData;
@@ -33,7 +33,7 @@ public class MealTable extends Activity {
         // preparing list data
         prepareListData();
  
-        listAdapterExapnd = new ExpandableListAdapter(this, listHeaderData, listChildData);
+        listAdapterExapnd = new ListAdapter_Expandable(this, listHeaderData, listChildData);
  
         // setting list adapter
         listViewExpand.setAdapter(listAdapterExapnd);
