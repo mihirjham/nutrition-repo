@@ -55,7 +55,7 @@ public class MainActivity extends Activity implements
 				android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 		spinner.setOnItemSelectedListener(this);
-
+		
 		postIt.setOnClickListener(this);
 		graph.setOnClickListener(this);
 		mealTable.setOnClickListener(this);
