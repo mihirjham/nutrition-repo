@@ -17,7 +17,7 @@ import android.widget.Button;
 
 public class Graph extends Activity implements OnClickListener {
 	Button MealTableGraph;
-	Intent intent, prevIntent = getIntent();
+	Intent intent;
 	String loggedInUser;
 
 	@Override
@@ -28,6 +28,7 @@ public class Graph extends Activity implements OnClickListener {
 		MealTableGraph = (Button) findViewById(R.id.mealTableButtonGraphWindow);
 		MealTableGraph.setOnClickListener(this);
 		
+		Intent prevIntent = getIntent();
 		if(prevIntent.getExtras() != null){
 			loggedInUser = prevIntent.getExtras().getString("username");
 		}

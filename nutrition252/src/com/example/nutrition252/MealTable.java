@@ -22,7 +22,6 @@ public class MealTable extends Activity {
 	List<String> listHeaderData;
 	HashMap<String, List<String>> listChildData;
 	String loggedInUser;
-	Intent prevIntent = getIntent();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +29,7 @@ public class MealTable extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.meal_table);
 		
+		Intent prevIntent = getIntent();
 		if(prevIntent.getExtras() != null){
 			loggedInUser = prevIntent.getExtras().getString("username");
 		}
