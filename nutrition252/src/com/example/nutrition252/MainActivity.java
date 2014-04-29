@@ -73,7 +73,7 @@ public class MainActivity extends Activity implements
 				public void run() {
 					Socket toServer;
 					try {
-						toServer = new Socket("sslab01.cs.purdue.edu", 5555);
+						toServer = new Socket("moore07.cs.purdue.edu", 3001);
 						PrintWriter printwriter = new PrintWriter(
 								toServer.getOutputStream(), true);
 						sendToServer(printwriter);
@@ -134,13 +134,12 @@ public class MainActivity extends Activity implements
 
 	// sends info to server and closes printwriter
 	public void sendToServer(PrintWriter printwriter) {
-		String command = new String("INSERT-MEAL|");
-		command.concat(username.getText() + "|root|password|");// need to change
-																// this
+		String command = "INSERT-MEAL|" + "root|password|" + loggedInUser +"|";
+		// this
 		String selectedItem = spinner.getSelectedItem().toString();
 		selectedItem = selectedItem.replace('-', '|');// separate the food item
 														// and calorie number
-		command.concat(selectedItem);
+		command = command + selectedItem;
 		printwriter.print(command);
 		printwriter.close();
 	}
