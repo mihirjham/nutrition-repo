@@ -73,10 +73,10 @@ public class Login extends Activity implements OnClickListener {
 							else
 							{
 								System.out.println("Login failed");
-//								new AlertDialog.Builder(this)
-//									.setTitle("Error")
-//									.setMessage("Login failed")
-//									.show();
+								new AlertDialog.Builder(Login.this)
+									.setTitle("Error")
+									.setMessage("Login failed")
+									.show();
 							}
 						}
 					}
