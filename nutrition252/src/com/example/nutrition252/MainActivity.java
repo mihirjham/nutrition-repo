@@ -31,15 +31,15 @@ public class MainActivity extends Activity implements
 	private Intent intent;
 	private Button logout;
 	String left, right, text,loggedInUser;
-	Bundle getUserName = getIntent().getExtras();
+	Intent prevIntent = getIntent();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		if(getUserName != null){
-			loggedInUser = getUserName.getString("username");
+		if(prevIntent.getExtras() != null){
+			loggedInUser = prevIntent.getExtras().getString("username");
 		}
 
 		logout = (Button) findViewById(R.id.bLogout);

@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
 
@@ -21,7 +22,7 @@ public class MealTable extends Activity {
 	List<String> listHeaderData;
 	HashMap<String, List<String>> listChildData;
 	String loggedInUser;
-	Bundle getUserName = getIntent().getExtras();
+	Intent prevIntent = getIntent();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,8 @@ public class MealTable extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.meal_table);
 		
-		if(getUserName != null){
-			loggedInUser = getUserName.getString("username");
+		if(prevIntent.getExtras() != null){
+			loggedInUser = prevIntent.getExtras().getString("username");
 		}
 
 		// get the listview

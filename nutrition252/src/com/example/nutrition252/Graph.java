@@ -8,7 +8,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Calendar;
 import java.util.Date;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,9 +17,8 @@ import android.widget.Button;
 
 public class Graph extends Activity implements OnClickListener {
 	Button MealTableGraph;
-	Intent intent;
+	Intent intent, prevIntent = getIntent();
 	String loggedInUser;
-	Bundle getUserName = getIntent().getExtras();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +28,8 @@ public class Graph extends Activity implements OnClickListener {
 		MealTableGraph = (Button) findViewById(R.id.mealTableButtonGraphWindow);
 		MealTableGraph.setOnClickListener(this);
 		
-		if(getUserName != null){
-			loggedInUser = getUserName.getString("username");
+		if(prevIntent.getExtras() != null){
+			loggedInUser = prevIntent.getExtras().getString("username");
 		}
 		
 		new Thread() {
