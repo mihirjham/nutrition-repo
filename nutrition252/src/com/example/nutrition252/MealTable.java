@@ -20,12 +20,18 @@ public class MealTable extends Activity {
 	ExpandableListView listViewExpand;
 	List<String> listHeaderData;
 	HashMap<String, List<String>> listChildData;
+	String loggedInUser;
+	Bundle getUserName = getIntent().getExtras();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.meal_table);
+		
+		if(getUserName != null){
+			loggedInUser = getUserName.getString("username");
+		}
 
 		// get the listview
 		listViewExpand = (ExpandableListView) findViewById(R.id.listViewMain);
@@ -47,10 +53,7 @@ public class MealTable extends Activity {
 					PrintWriter printwriter = new PrintWriter(
 							toServer.getOutputStream(), true);
 					// asks server for all info
-					String command = new String("GET-USER-INFO|root|password");// need
-																				// to
-																				// add
-																				// username
+					String command = new String("GET-USER-INFO-CURRENT|root|password|"+loggedInUser);
 					printwriter.print(command);
 					BufferedReader in = new BufferedReader(new InputStreamReader(toServer.getInputStream()));
 					in.read(requestedInfo);

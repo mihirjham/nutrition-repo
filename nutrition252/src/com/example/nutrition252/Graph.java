@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +19,8 @@ import android.widget.Button;
 public class Graph extends Activity implements OnClickListener {
 	Button MealTableGraph;
 	Intent intent;
+	String loggedInUser;
+	Bundle getUserName = getIntent().getExtras();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,10 @@ public class Graph extends Activity implements OnClickListener {
 		setContentView(R.layout.graph);
 		MealTableGraph = (Button) findViewById(R.id.mealTableButtonGraphWindow);
 		MealTableGraph.setOnClickListener(this);
+		
+		if(getUserName != null){
+			loggedInUser = getUserName.getString("username");
+		}
 		
 		new Thread() {
 			public void run() {
@@ -37,10 +45,12 @@ public class Graph extends Activity implements OnClickListener {
 							true);
 					// asks server to return only dates and calories to plot on
 					// graph
-					String command = new String("GET-GRAPH-INFO|root|password");// need
-																				// to
-																				// add
-																				// username
+					Date date = new Date();
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(date);
+					int month = cal.get(Calendar.MONTH);
+					month += 1;
+					String command = new String("GET-GRAPH-INFO|root|password|"+loggedInUser+"|"+month);
 					printwriter.print(command);
 					BufferedReader in = new BufferedReader(new InputStreamReader(toServer.getInputStream()));
 					in.read(requestedInfo);

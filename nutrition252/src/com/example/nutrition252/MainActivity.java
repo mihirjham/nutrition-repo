@@ -30,16 +30,21 @@ public class MainActivity extends Activity implements
 	private EditText manualCalories;
 	private Intent intent;
 	private Button logout;
-
-	String left, right, text;
+	String left, right, text,loggedInUser;
+	Bundle getUserName = getIntent().getExtras();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		if(getUserName != null){
+			loggedInUser = getUserName.getString("username");
+		}
 
 		logout = (Button) findViewById(R.id.bLogout);
 		username = (TextView) findViewById(R.id.tvUserName);
+		username.setText(loggedInUser);
 		postIt = (Button) findViewById(R.id.bPostIt);
 		graph = (Button) findViewById(R.id.bGraph);
 		mealTable = (Button) findViewById(R.id.bMealTable);
@@ -81,9 +86,11 @@ public class MainActivity extends Activity implements
 			}.start();
 		} else if (id == R.id.bGraph) {
 			intent = new Intent(v.getContext(), Graph.class);
+			intent.putExtra("username", loggedInUser);
 			startActivityForResult(intent, 0);
 		} else if (id == R.id.bMealTable) {
 			intent = new Intent(v.getContext(), MealTable.class);
+			intent.putExtra("username", loggedInUser);
 			startActivityForResult(intent, 0);
 		}else if(id == R.id.bLogout){
 			intent = new Intent(v.getContext(), Login.class);
