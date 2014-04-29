@@ -61,10 +61,9 @@ public class Login extends Activity implements OnClickListener {
 						String serverResponse = in.readLine();
 						outgoing.close();
 						
-						if(!serverResponse.equals(""))
+						if(serverResponse != null)
 						{
-							System.out.println(serverResponse);
-							String response[] = serverResponse.split("|");
+							String response[] = serverResponse.split("\\|");
 							if(response[0].equals(username.getText().toString()) && response[1].equals(password.getText().toString()))
 							{
 								Intent openGetFit = new Intent("com.example.nutrition252.MAINACTIVITY");
@@ -87,10 +86,7 @@ public class Login extends Activity implements OnClickListener {
 					}
 				}
 			}.start();
-
-//			Intent openGetFit = new Intent(
-//					"com.example.nutrition252.MAINACTIVITY");
-//			startActivity(openGetFit);
+			
 		} else if (id == R.id.Register) {
 			intent = new Intent(v.getContext(), Register.class);
 			startActivityForResult(intent, 0);
