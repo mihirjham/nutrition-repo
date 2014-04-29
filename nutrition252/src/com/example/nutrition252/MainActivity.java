@@ -29,6 +29,8 @@ public class MainActivity extends Activity implements
 	private Button mealTable;
 	private EditText manualCalories;
 	private Intent intent;
+	private Button logout;
+
 	String left, right, text;
 
 	@Override
@@ -36,6 +38,7 @@ public class MainActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		logout = (Button) findViewById(R.id.bLogout);
 		username = (TextView) findViewById(R.id.tvUserName);
 		postIt = (Button) findViewById(R.id.bPostIt);
 		graph = (Button) findViewById(R.id.bGraph);
@@ -51,6 +54,8 @@ public class MainActivity extends Activity implements
 		postIt.setOnClickListener(this);
 		graph.setOnClickListener(this);
 		mealTable.setOnClickListener(this);
+		logout.setOnClickListener(this);
+
 
 	}
 
@@ -80,6 +85,10 @@ public class MainActivity extends Activity implements
 		} else if (id == R.id.bMealTable) {
 			intent = new Intent(v.getContext(), MealTable.class);
 			startActivityForResult(intent, 0);
+		}else if(id == R.id.bLogout){
+			intent = new Intent(v.getContext(), Login.class);
+			startActivityForResult(intent, 0);
+	
 		}
 	}
 
