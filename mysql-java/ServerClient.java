@@ -11,7 +11,7 @@ class ServerClient
 
 		try
 		{
-			outgoing = new Socket("localhost", 3001);
+			outgoing = new Socket("moore07.cs.purdue.edu", 3001);
 			PrintWriter out = new PrintWriter(outgoing.getOutputStream(), true);
 			//String command = "GET-USER-INFO|root|password|mihir";
 			//out.print(command);
