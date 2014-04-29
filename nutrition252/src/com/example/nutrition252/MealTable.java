@@ -50,7 +50,7 @@ public class MealTable extends Activity {
 				Socket toServer;
 				char [] requestedInfo = new char[1024];
 				try {
-					toServer = new Socket("sslab01.cs.purdue.edu", 5555);
+					toServer = new Socket("moore07.cs.purdue.edu", 3001);
 					PrintWriter printwriter = new PrintWriter(
 							toServer.getOutputStream(), true);
 					// asks server for all info

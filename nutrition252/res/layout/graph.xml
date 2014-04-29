@@ -4,11 +4,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/graphView"
+    <LinearLayout
+        android:id="@+id/graphViewLayout"
         android:layout_width="match_parent"
         android:layout_height="184dp"
-        android:text="This is where the graph will be" />
+        android:orientation="horizontal" />
 
     <TextView
         android:id="@+id/tvMax"
