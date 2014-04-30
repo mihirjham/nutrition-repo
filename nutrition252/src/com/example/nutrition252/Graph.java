@@ -14,6 +14,8 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -37,6 +39,7 @@ public class Graph extends Activity implements OnClickListener {
 		setContentView(R.layout.graph);
 		MealTableGraph = (Button) findViewById(R.id.mealTableButtonGraphWindow);
 		MealTableGraph.setOnClickListener(this);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Intent prevIntent = getIntent();
 		if(prevIntent.getExtras() != null){
@@ -126,6 +129,16 @@ public class Graph extends Activity implements OnClickListener {
 		}.start();
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
+	}
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub

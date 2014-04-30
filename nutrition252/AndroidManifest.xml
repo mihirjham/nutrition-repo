@@ -34,14 +34,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity android:name="com.example.nutrition252.Graph" 
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:parentActivityName="com.example.nutrition252.MainActivity" >
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.nutrition252.MainActivity" />
         </activity>
+        
         <activity android:name="com.example.nutrition252.MealTable" 
-            >
+            android:parentActivityName="com.example.nutrition252.MainActivity" >
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.nutrition252.MainActivity" />
         </activity>
+        
         <activity android:name="com.example.nutrition252.Register" 
-            >
+           android:parentActivityName="com.example.nutrition252.Login" >
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.nutrition252.Login" />
         </activity>
     </application>
 

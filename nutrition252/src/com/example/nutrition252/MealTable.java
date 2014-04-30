@@ -14,6 +14,8 @@ import java.util.Vector;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.widget.ExpandableListView;
 
 public class MealTable extends Activity {
@@ -30,7 +32,8 @@ public class MealTable extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.meal_table);
-		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		Intent prevIntent = getIntent();
 		if(prevIntent.getExtras() != null){
 			loggedInUser = prevIntent.getExtras().getString("username");
@@ -104,5 +107,16 @@ public class MealTable extends Activity {
 
 		// setting list adapter
 		listViewExpand.setAdapter(listAdapterExapnd);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 }

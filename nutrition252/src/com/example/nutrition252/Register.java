@@ -8,6 +8,8 @@ import java.net.Socket;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -28,10 +30,22 @@ public class Register extends Activity implements OnClickListener {
 		newPassword = (EditText) findViewById(R.id.PasswordRegisterPage);
 		newConfirmPassword = (EditText) findViewById(R.id.ConfirmEditTextPasswordRegisterPage);
 		confirm = (Button) findViewById(R.id.ConfirmButtonRegisterPage);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		confirm.setOnClickListener(this);
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
+	}
+	
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
