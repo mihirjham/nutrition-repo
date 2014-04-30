@@ -111,6 +111,7 @@ public class Graph extends Activity implements OnClickListener {
 		int id = v.getId();
 		if (id == R.id.mealTableButtonGraphWindow) {
 			intent = new Intent(v.getContext(), MealTable.class);
+			intent.putExtra("username", loggedInUser);
 			startActivityForResult(intent, 0);
 		}
 
