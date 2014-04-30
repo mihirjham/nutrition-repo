@@ -83,30 +83,9 @@ public class Login extends Activity implements OnClickListener {
 													.show();
 										 } catch (Exception e) {
 												System.out.println(e.toString());
-} 
+										 	} 
 				                         } });
 							}
-							/*else
-							{
-								/*System.out.println("Login failed");
-								new AlertDialog.Builder(Login.this)
-									.setTitle("Error")
-									.setMessage("Login failed")
-									.show();
-								  Login.this.runOnUiThread(new Runnable(){
-
-				                         @Override
-				                         public void run(){
-				                             try {
-				                            	 new AlertDialog.Builder(Login.this)
-													.setTitle("Error")
-													.setMessage("Login failed")
-													.show();
-										 } catch (Exception e) {
-												System.out.println(e.toString());
-} 
-				                         } });
-							}*/
 						}
 					}
 					catch(Exception e)

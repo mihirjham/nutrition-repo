@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -51,7 +53,9 @@ public class Register extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		int id = v.getId();
 		if (id == R.id.ConfirmButtonRegisterPage) {
-			if(newPassword.getText().toString().equals(newConfirmPassword.getText().toString()))
+			if((!newPassword.getText().toString().equals("")) 
+					&& (!newConfirmPassword.getText().toString().equals(""))
+					&& (newPassword.getText().toString().equals(newConfirmPassword.getText().toString())))
 			{
 				new Thread() {
 					public void run()
@@ -84,6 +88,13 @@ public class Register extends Activity implements OnClickListener {
 						}
 					}
 				}.start();
+			}
+			else
+			{
+				new Builder(Register.this)
+    	 		.setTitle("Error")
+    	 		.setMessage("Register failed, passwords do not match or fields are empty!")
+    	 		.show();				 
 			}
 		}
 	}

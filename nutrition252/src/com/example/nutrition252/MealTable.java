@@ -114,7 +114,10 @@ public class MealTable extends Activity {
 	    switch (item.getItemId()) {
 	    // Respond to the action bar's Up/Home button
 	    case android.R.id.home:
-	        NavUtils.navigateUpFromSameTask(this);
+	    	Intent intent = new Intent(this, MainActivity.class);
+	    	intent.putExtra("username", loggedInUser);
+	    	startActivityForResult(intent, 0);
+	        //NavUtils.navigateUpFromSameTask(this);
 	        return true;
 	    }
 	    return super.onOptionsItemSelected(item);

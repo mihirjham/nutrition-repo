@@ -77,7 +77,7 @@ public class MainActivity extends Activity implements
 						PrintWriter printwriter = new PrintWriter(
 								toServer.getOutputStream(), true);
 						sendToServer(printwriter);
-						toServer.close();
+						toServer.close();			
 					} catch (IllegalArgumentException iae) {
 					} catch (UnknownHostException uhe) {
 					} catch (SecurityException se) {
@@ -85,6 +85,11 @@ public class MainActivity extends Activity implements
 					}
 				}
 			}.start();
+			
+			Intent newIntent = new Intent(this, MainActivity.class);
+			newIntent.putExtra("username", loggedInUser);
+			startActivityForResult(newIntent, 0);
+			
 		} else if (id == R.id.bGraph) {
 			intent = new Intent(v.getContext(), Graph.class);
 			intent.putExtra("username", loggedInUser);

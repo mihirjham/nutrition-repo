@@ -107,11 +107,11 @@ public class Graph extends Activity implements OnClickListener {
 								  }
 								  avg /= n;
 								  TextView maximum = (TextView)findViewById(R.id.tvMax);
-								  maximum.setText("Maximum Calories: "+(int)max);
+								  maximum.setText("Maximum: "+(int)max);
 								  TextView minimum = (TextView)findViewById(R.id.tvMin);
-								  minimum.setText("Minimum Calories: "+(int)min);
+								  minimum.setText("Minimum: "+(int)min);
 								  TextView average = (TextView)findViewById(R.id.tvAvg);
-								  average.setText("Average Calories: "+(int)avg);
+								  average.setText("Average: "+(int)avg);
 								  LinearLayout linearLayout = (LinearLayout)findViewById(R.id.graphViewLayout);
 								  linearLayout.addView(graphView);
 							  } catch (Exception e) {
@@ -134,7 +134,10 @@ public class Graph extends Activity implements OnClickListener {
 	    switch (item.getItemId()) {
 	    // Respond to the action bar's Up/Home button
 	    case android.R.id.home:
-	        NavUtils.navigateUpFromSameTask(this);
+	    	Intent intent = new Intent(this, MainActivity.class);
+	    	intent.putExtra("username", loggedInUser);
+	    	startActivityForResult(intent, 0);
+	        //NavUtils.navigateUpFromSameTask(this);
 	        return true;
 	    }
 	    return super.onOptionsItemSelected(item);
