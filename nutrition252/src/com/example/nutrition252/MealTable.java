@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,8 +20,9 @@ public class MealTable extends Activity {
 
 	ListAdapter_Expandable listAdapterExapnd;
 	ExpandableListView listViewExpand;
-	List<String> listHeaderData;
-	HashMap<String, List<String>> listChildData;
+	List<String> listHeaderData = new ArrayList<String>();
+	HashMap<String, List<String>> listChildData = new HashMap<String, List<String>>();
+	Vector<String> queries = new Vector<String>();
 	String loggedInUser;
 
 	@Override
@@ -33,31 +35,54 @@ public class MealTable extends Activity {
 		if(prevIntent.getExtras() != null){
 			loggedInUser = prevIntent.getExtras().getString("username");
 		}
-
-		// get the listview
-		listViewExpand = (ExpandableListView) findViewById(R.id.listViewMain);
-
-		// preparing list data
-		prepareListData();
-
-		listAdapterExapnd = new ListAdapter_Expandable(this, listHeaderData,
-				listChildData);
-
-		// setting list adapter
-		listViewExpand.setAdapter(listAdapterExapnd);
+		
 		new Thread() {
 			public void run() {
 				Socket toServer;
-				char [] requestedInfo = new char[1024];
 				try {
 					toServer = new Socket("moore07.cs.purdue.edu", 3001);
 					PrintWriter printwriter = new PrintWriter(
 							toServer.getOutputStream(), true);
 					// asks server for all info
-					String command = new String("GET-USER-INFO-CURRENT|root|password|"+loggedInUser);
-					printwriter.print(command);
+					String command = new String("GET-USER-INFO|root|password|"+loggedInUser);
+					printwriter.println(command);
 					BufferedReader in = new BufferedReader(new InputStreamReader(toServer.getInputStream()));
-					in.read(requestedInfo);
+					
+					String serverResponse;
+					while((serverResponse = in.readLine()) != null)
+					{
+						queries.add(serverResponse);
+					}
+
+					for(int i = 0; i < queries.size(); i++)
+					{
+						String query = queries.get(i);
+						String queryArray[] = query.split("\\|");
+
+						if(listChildData.get(queryArray[3]) != null)
+						{
+
+							List<String> list = listChildData.get(queryArray[3]);
+							list.add(queryArray[1] + "-" + queryArray[2]);
+							listChildData.put(queryArray[3], list);
+						}
+
+						else
+						{
+
+							List<String> list = new ArrayList<String>();
+							list.add(queryArray[1] + "-" + queryArray[2]);
+							listChildData.put(queryArray[3], list);
+						}
+					}
+					
+					for(String key : listChildData.keySet())
+					{
+						listHeaderData.add(key);
+					}
+
+
+
 					// need to add code to display the info obtained from server
 					printwriter.close();
 					toServer.close();
@@ -69,44 +94,15 @@ public class MealTable extends Activity {
 				}
 			}
 		}.start();
-	}
 
-	/*
-	 * Preparing the list data
-	 */
-	private void prepareListData() {
-		listHeaderData = new ArrayList<String>();
-		listChildData = new HashMap<String, List<String>>();
 
-		// Adding child data
-		listHeaderData.add("Monday 23/04/2104");
-		listHeaderData.add("Tuesday 24/04/2014");
-		listHeaderData.add("Wednesday 25/04/2014");
+		// get the listview
+		listViewExpand = (ExpandableListView) findViewById(R.id.listViewMain);
 
-		// Adding child data
-		List<String> dayOne = new ArrayList<String>();
-		dayOne.add("Chicekn - 200 calories");
-		dayOne.add("Chicekn - 200 calories");
-		dayOne.add("Chicekn - 200 calories");
-		dayOne.add("Chicekn - 200 calories");
-		dayOne.add("Chicekn - 200 calories");
+		listAdapterExapnd = new ListAdapter_Expandable(this, listHeaderData,
+				listChildData);
 
-		List<String> dayTwo = new ArrayList<String>();
-		dayTwo.add("Chicekn - 200 calories");
-		dayTwo.add("Chicekn - 200 calories");
-		dayTwo.add("Chicekn - 200 calories");
-		dayTwo.add("Chicekn - 200 calories");
-		dayTwo.add("Chicekn - 200 calories");
-
-		List<String> dayThree = new ArrayList<String>();
-		dayThree.add("Chicekn - 200 calories");
-		dayThree.add("Chicekn - 200 calories");
-		dayThree.add("Chicekn - 200 calories");
-		dayThree.add("Chicekn - 200 calories");
-		dayThree.add("Chicekn - 200 calories");
-
-		listChildData.put(listHeaderData.get(0), dayOne); // Header, Child data
-		listChildData.put(listHeaderData.get(1), dayTwo);
-		listChildData.put(listHeaderData.get(2), dayThree);
+		// setting list adapter
+		listViewExpand.setAdapter(listAdapterExapnd);
 	}
 }
