@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
@@ -88,6 +89,9 @@ public class Graph extends Activity implements OnClickListener {
 								  graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);
 								  graphView.getGraphViewStyle().setGridColor(Color.BLACK);
 								  graphView.addSeries(graphSeries);
+								  TextView maximum = (TextView)findViewById(R.id.tvMax);
+								  TextView minimum = (TextView)findViewById(R.id.tvMin);
+								  TextView average = (TextView)findViewById(R.id.tvAvg);
 								  LinearLayout linearLayout = (LinearLayout)findViewById(R.id.graphViewLayout);
 								  linearLayout.addView(graphView);
 							  } catch (Exception e) {

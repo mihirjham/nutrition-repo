@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
-        android:text="Maximum" />
+        />
 
     <TextView
         android:id="@+id/tvMin"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
         android:layout_marginTop="200dp"
-        android:text="Minimum" />
+        />
 
     <TextView
         android:id="@+id/tvAvg"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="140dp"
         android:layout_marginTop="200dp"
-        android:text="Average" />
+        />
 
     <TextView
         android:id="@+id/tvHealthBar"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="140dp"
         android:layout_marginTop="230dp"
-        android:text="Healthy or not" />
+        />
 
     <Button
         android:id="@+id/mealTableButtonGraphWindow"
