@@ -89,9 +89,26 @@ public class Graph extends Activity implements OnClickListener {
 								  graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);
 								  graphView.getGraphViewStyle().setGridColor(Color.BLACK);
 								  graphView.addSeries(graphSeries);
+								  
+								  //calculate max, min, and avg to display
+								  double max=0,min=0,avg=0;
+								  int n;
+								  for(n=0;n<graphData.length;n++){
+									  if(graphData[n].getY()>max){
+										  max = graphData[n].getY();
+									  }
+									  if(graphData[n].getY()<min){
+										  min = graphData[n].getY();
+									  }
+									  avg += graphData[n].getY();
+								  }
+								  avg /= n;
 								  TextView maximum = (TextView)findViewById(R.id.tvMax);
+								  maximum.setText("Maximum Calories: "+(int)max);
 								  TextView minimum = (TextView)findViewById(R.id.tvMin);
+								  minimum.setText("Minimum Calories: "+(int)min);
 								  TextView average = (TextView)findViewById(R.id.tvAvg);
+								  average.setText("Average Calories: "+(int)avg);
 								  LinearLayout linearLayout = (LinearLayout)findViewById(R.id.graphViewLayout);
 								  linearLayout.addView(graphView);
 							  } catch (Exception e) {
