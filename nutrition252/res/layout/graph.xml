@@ -14,53 +14,32 @@
         android:id="@+id/tvMax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_marginTop="200dp"
-        />
-=======
         android:layout_marginTop="240dp"
         android:text="Maximum" />
->>>>>>> b0a4501fcdd553536d6544b0b3f561b99fe678a2
 
     <TextView
         android:id="@+id/tvMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
-<<<<<<< HEAD
-        android:layout_marginTop="200dp"
-        />
-=======
         android:layout_marginTop="240dp"
         android:text="Minimum" />
->>>>>>> b0a4501fcdd553536d6544b0b3f561b99fe678a2
 
     <TextView
         android:id="@+id/tvAvg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="140dp"
-<<<<<<< HEAD
-        android:layout_marginTop="200dp"
-        />
-=======
         android:layout_marginTop="240dp"
         android:text="Average" />
->>>>>>> b0a4501fcdd553536d6544b0b3f561b99fe678a2
 
     <TextView
         android:id="@+id/tvHealthBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="230dp"
-        />
-=======
         android:layout_marginLeft="200dp"
         android:layout_marginTop="240dp"
         android:text="Healthy or not" />
->>>>>>> b0a4501fcdd553536d6544b0b3f561b99fe678a2
 
     <Button
         android:id="@+id/mealTableButtonGraphWindow"
