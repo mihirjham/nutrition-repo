@@ -70,13 +70,29 @@ public class Login extends Activity implements OnClickListener {
 								openGetFit.putExtra("username", username.getText().toString());								
 								startActivity(openGetFit);
 							}
-							else
+							else if( response[0] != username.getText().toString() || response[1] !=password.getText().toString())
+							{
+								  Login.this.runOnUiThread(new Runnable(){
+
+				                         @Override
+				                         public void run(){
+				                             try {
+				                            	 new AlertDialog.Builder(Login.this)
+													.setTitle("Error")
+													.setMessage("Login failed, Incorrect password or username")
+													.show();
+										 } catch (Exception e) {
+												System.out.println(e.toString());
+} 
+				                         } });
+							}
+							/*else
 							{
 								/*System.out.println("Login failed");
 								new AlertDialog.Builder(Login.this)
 									.setTitle("Error")
 									.setMessage("Login failed")
-									.show();*/
+									.show();
 								  Login.this.runOnUiThread(new Runnable(){
 
 				                         @Override
@@ -90,7 +106,7 @@ public class Login extends Activity implements OnClickListener {
 												System.out.println(e.toString());
 } 
 				                         } });
-							}
+							}*/
 						}
 					}
 					catch(Exception e)
