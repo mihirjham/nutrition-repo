@@ -147,7 +147,7 @@ class ThreadedHandler implements Runnable
 			
 			for(int i = 0; i < 31; i++)
 			{
-				out.printf("%d|%4d-%02d-%02d\n", month[i], currentYear, getMonth, i+1);
+				out.printf("%d|%02d\n", month[i],i+1);
 			}
 		}
 		catch(Exception e)
